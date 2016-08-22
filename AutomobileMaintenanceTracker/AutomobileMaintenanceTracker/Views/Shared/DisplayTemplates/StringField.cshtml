@@ -1,0 +1,11 @@
+﻿@model string
+
+@if (!(string.IsNullOrWhiteSpace(Model)))
+{
+    @Model
+}
+else
+{
+    @ResponseMessage.NoData;
+}
+

@@ -1,0 +1,13 @@
+﻿
+
+@model int?
+@using AutomobileMaintenanceTracker.Helpers
+
+@if (Model != null && Model > 0)
+{
+    @LookupValues.Technician.Values.AsQueryable().Where(i => i.Value == Model.ToString()).First().Text
+}
+else
+{
+    @ResponseMessage.NoData
+}

@@ -1,0 +1,87 @@
+﻿@model AutomobileMaintenanceTracker.ViewModels.MaintenanceViewModel
+
+@{
+    ViewBag.Title = (Model != null ? "Edit" : "Create") + " Maintenance";
+}
+
+<h2> @ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CarId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaintenanceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaintenanceDate)
+                @Html.ValidationMessageFor(model => model.MaintenanceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TechnicianId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TechnicianId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TechnicianId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+        @Html.Partial("_Service", Model)
+
+    </div>
+}
+
+@{ if (Model != null)
+    {
+        <div>
+            @Html.ActionLink("Back to List", "Index/" + Model.CarId)
+        </div>  
+    }
+}
+
+
+@section Scripts {
+
+}
+
+
+<script>
+    $(function () {
+        $("#MaintenanceDate").datepicker({
+	            //showOn: "button",
+	            //buttonImage: "/images/calendar-icon.png",
+	            //buttonImageOnly: true,
+	            //buttonText: "Select date"
+	         });
+	     });
+</script>
+
+

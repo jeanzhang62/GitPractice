@@ -1,0 +1,5 @@
+﻿
+@model int?
+@using AutomobileMaintenanceTracker.Helpers;
+
+@Html.DropDownListFor(model => model, new SelectList(LookupValues.Service.Values, "Value", "Text", this.Model))

@@ -1,0 +1,19 @@
+﻿@model IPagedList<AutomobileMaintenanceTracker.ViewModels.MaintenanceViewModel>
+@*@model IEnumerable<AutomobileMaintenanceTracker.ViewModels.MaintenanceViewModel>*@
+
+
+
+@{
+    ViewBag.Title = "Maintenances";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<form method="get" action="@Url.Action("List")" data-amt-ajax="true" data-amt-target="#maintenanceList">
+    <input type="search" name="searchTerm" data-amt-autocomplete="@Url.Action("AutoComplete")" />
+    <input type="submit" value="Search By Car" />
+
+</form>
+
+@Html.Partial("_MaintenanceList", Model)

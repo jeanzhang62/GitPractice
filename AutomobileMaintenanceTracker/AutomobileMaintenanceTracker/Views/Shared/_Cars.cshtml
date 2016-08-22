@@ -1,0 +1,43 @@
+﻿@model IPagedList<CarViewModel>
+<div id="carList">
+
+    <div class="pagedList" data-amt-target="carList">
+         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.MinimalWithItemCountText)
+
+    </div>
+    <br/>
+
+    @if (Model != null)
+    {
+
+        if (TempData.ContainsKey(ResponseMessage.SucceededMessage))
+        { <p class="success">@TempData[ResponseMessage.SucceededMessage]</p> }
+
+    }
+    else if (TempData.ContainsKey(ResponseMessage.FailedMessage) && Model == null)
+    {
+        <p class="alert">@TempData[ResponseMessage.FailedMessage]</p>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <h4>
+                @Html.DisplayFor(modelItem => item.TypeId)
+                @Html.DisplayFor(modelItem => item.Year)
+                @Html.DisplayFor(modelItem => item.MakeId)
+                @Html.DisplayFor(modelItem => item.ModelId)
+            </h4>
+        </div>
+
+        <div>Odometer: @item.Odometer</div>
+        <div>Number of Maintenances: @item.Maintenances.Count()</div>
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Maintenance", "Index", "Maintenances", new { id = item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+        <hr />
+    }
+
+</div>

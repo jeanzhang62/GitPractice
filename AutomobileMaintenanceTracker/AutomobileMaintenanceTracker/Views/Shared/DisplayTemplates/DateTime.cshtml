@@ -1,0 +1,11 @@
+﻿
+@inherits WebViewPage<DateTime?>
+
+@if (Model.HasValue)
+{
+    @String.Format("{0:" + "dd-mm-yyyy" + "}", @Model)
+}
+else
+{
+    <text>@ResponseMessage.NoData</text>
+}

@@ -1,0 +1,24 @@
+﻿@model IPagedList<CarViewModel>
+
+@{
+    ViewBag.Title = "Cars";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create Car", "Create")
+</p>
+
+
+<form method="get" action="@Url.Action("Index")" data-amt-ajax="true" data-amt-target="#carList">
+    <input type="search" name="searchTerm"  data-amt-autocomplete="@Url.Action("AutoComplete")"/>
+    <input type="submit" value="Search By Year" />
+  
+</form>
+
+@Html.Partial("_Cars", Model)
+
+
+

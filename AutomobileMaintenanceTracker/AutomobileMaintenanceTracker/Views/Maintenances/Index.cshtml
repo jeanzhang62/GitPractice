@@ -1,0 +1,23 @@
+﻿@model AutomobileMaintenanceTracker.ViewModels.CarViewModel
+
+
+@{
+    ViewBag.Title = "Maintenance History";
+}
+
+<h2> @ViewBag.Title </h2><h4>
+    @Html.DisplayFor(modelitem => Model.TypeId)
+    @Html.DisplayFor(modelItem => Model.Year)
+    @Html.DisplayFor(modelItem => Model.MakeId)
+    @Html.DisplayFor(modelItem => Model.ModelId)
+</h4>
+<p>
+    @Html.ActionLink("Create New", "Create", new { carId = Model.Id, CarMakeModel = @TempData["CarMakeModel"] })
+</p>
+    <p>
+        @Html.Partial("_Maintenance", @Model.Maintenances)
+    </p>
+
+ @section BreadCrumbs { } 
+
+

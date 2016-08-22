@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AutomobileMaintenanceTracker.ViewModels.MaintenanceViewModel>
+
+@if (Model != null)
+{
+
+    if (TempData.ContainsKey(ResponseMessage.SucceededMessage))
+    { <p class="success">@TempData[ResponseMessage.SucceededMessage]</p> }
+
+}
+else if (TempData.ContainsKey(ResponseMessage.FailedMessage) && Model == null)
+{
+    <p class="alert">@TempData[ResponseMessage.FailedMessage]</p>
+}
+
+<div class="form-horizontal">
+    @foreach (var item in Model)
+    {
+
+        <div class="form-group">
+            @Html.LabelFor(model => item.MaintenanceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => item.MaintenanceDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => item.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => item.Rating, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => item.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => item.Comments, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        @Html.Partial("_Service", item)
+
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+
+        <hr />
+    }
+
+    </div>

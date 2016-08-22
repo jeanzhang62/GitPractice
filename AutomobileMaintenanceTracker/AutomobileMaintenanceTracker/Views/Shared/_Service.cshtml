@@ -1,0 +1,42 @@
+﻿
+@model AutomobileMaintenanceTracker.ViewModels.MaintenanceViewModel
+
+   
+@if( Model!= null && Model.Services != null)
+{
+<div>Number of Service: @Model.Services.Count()</div>
+
+<div id="servicelist">
+    @foreach (var item in Model.Services)
+    {
+    <div class="form-group">
+        @Html.LabelFor(model => item.ServiceId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.DisplayFor(model => item.ServiceId, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        @Html.LabelFor(model => item.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.DisplayFor(model => item.Price, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("Delete Service", "DeleteServiceFromMaintenance", new { serviceId = item.ServiceId, maintenanceId = Model.Id }, null)
+        </div>
+
+
+    </div>
+
+    }
+</div>
+
+<div id="servicediv" title="Add New Service to Maintenance">
+    <p>
+        @Html.EditorFor(model => model.ServiceId, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ActionLink("Add New Service To Maintenance", "AddServiceToMaintenance", new { maintenanceId = Model.Id }, new { data_amt_id = Model.Id, id = "AddServiceToMaintenance" })
+    </p>
+</div>
+
+}
+
+
+
